@@ -7,8 +7,39 @@ const operatorBtns = document.querySelectorAll('.operator');
 let currentNum = '';
 let equationArr = [];
 
+let operate = {
+    '+': function(a,b) {
+        return a + b;
+    },
+    '-': function(a,b) {
+        return a - b;
+    },
+    '*': function(a, b) {
+        return a * b;
+    },
+    '/': function(a,b) {
+        return a / b;
+    },
+    "%": function(a,b) {
+        return a % b;
+    }
+};
+
 function handleNumbers(e) {
     currentNum += e.target.textContent;
+}
+
+function countArr(arr) {
+    return arr.filter((n) => {return !isNaN(n);}).length;
+}
+
+function simplifyExpression(arr, operator) {
+    
+    if (countArr(arr) === 2) {
+        let answer = operate[arr[1]](arr[0], arr[2]);
+        equationArr = [answer, operator];
+    }
+
 }
 
 function handleOperators(e) {
@@ -30,6 +61,8 @@ function handleOperators(e) {
             }
         }
     }
+    
+    simplifyExpression(equationArr, e.target.textContent);
 }
 
 function updateDisplay() {
