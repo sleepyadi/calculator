@@ -1,4 +1,25 @@
 * {
     margin: 0;
     padding: 0;
+    border: 1px solid red;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 500px;
+
+}
+
+.buttonrow {
+    display: flex;
+    flex-direction: row;
 }
