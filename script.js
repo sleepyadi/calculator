@@ -4,6 +4,8 @@ const displayEquation = document.querySelector('.equation');
 const displayCurrent = document.querySelector('.current-number');
 const operatorBtns = document.querySelectorAll('.operator');
 const decimalBtn = document.querySelector('.decimal');
+const allClearBtn = document.querySelector('.allclear');
+const backspaceBtn = document.querySelector('.backspace');
 
 let currentNum = '';
 let equationArr = [];
@@ -87,6 +89,19 @@ function updateDisplay() {
 
 }
 
+function allClear() {
+    currentNum = '';
+    equationArr = [];
+}
+
+function backspace() {
+    if (currentNum.length <= 1) {
+        currentNum = '';
+    } else {
+        currentNum = currentNum.substring(0, currentNum.length - 1);
+    }
+}
+
 numbers.forEach((number) => {
 
     number.addEventListener('click', handleNumbers)
@@ -114,3 +129,7 @@ decimalBtn.addEventListener('click', (event) => {
         }
     }
 });
+
+allClearBtn.addEventListener('click', allClear);
+
+backspaceBtn.addEventListener('click', backspace);
