@@ -3,6 +3,7 @@ const calcContainer = document.querySelector('.calculator');
 const displayEquation = document.querySelector('.equation');
 const displayCurrent = document.querySelector('.current-number');
 const operatorBtns = document.querySelectorAll('.operator');
+const decimalBtn = document.querySelector('.decimal');
 
 let currentNum = '';
 let equationArr = [];
@@ -31,6 +32,10 @@ function handleNumbers(e) {
 
 function countArr(arr) {
     return arr.filter((n) => {return !isNaN(n);}).length;
+}
+
+function countDecimal(str) {
+    return str.split('').filter((e) => {return e == '.';}).length;
 }
 
 function simplifyExpression(arr, operator) {
@@ -66,7 +71,7 @@ function handleOperators(e) {
 }
 
 function updateDisplay() {
-    
+    // can use equationArr.join('') + currentNum for live expression probably maybe
     if (currentNum) {
         displayCurrent.textContent = `${currentNum}`;
     } else {
@@ -96,5 +101,16 @@ operatorBtns.forEach((operatorBtn) => {
 calcContainer.addEventListener('click', (e) => {
     if (e.target.nodeName === 'BUTTON') {
         updateDisplay(e);
+    }
+});
+
+decimalBtn.addEventListener('click', (event) => {
+
+    let tempStr = currentNum.substring(currentNum.length-1);
+    
+    if(tempStr === '+' || tempStr === '-'|| !isNaN(tempStr)) {
+        if (countDecimal(currentNum) < 1) {
+            handleNumbers(event);
+        }
     }
 });
