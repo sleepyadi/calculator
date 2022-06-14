@@ -6,6 +6,7 @@ const operatorBtns = document.querySelectorAll('.operator');
 const decimalBtn = document.querySelector('.decimal');
 const allClearBtn = document.querySelector('.allclear');
 const backspaceBtn = document.querySelector('.backspace');
+const equalBtn = document.querySelector('.equal');
 
 let currentNum = '';
 let equationArr = [];
@@ -105,6 +106,15 @@ function backspace() {
     }
 }
 
+function showResult() {
+
+    if (equationArr.length == 2 && !isNaN(currentNum)) {
+        let answer = operate[equationArr[1]](equationArr[0], Number(currentNum));
+        currentNum = answer;
+        equationArr = [];
+    }
+}
+
 numbers.forEach((number) => {
 
     number.addEventListener('click', handleNumbers)
@@ -115,12 +125,6 @@ operatorBtns.forEach((operatorBtn) => {
     operatorBtn.addEventListener('click', handleOperators)
 });
 
-
-calcContainer.addEventListener('click', (e) => {
-    if (e.target.nodeName === 'BUTTON') {
-        updateDisplay(e);
-    }
-});
 
 decimalBtn.addEventListener('click', (event) => {
 
@@ -136,3 +140,11 @@ decimalBtn.addEventListener('click', (event) => {
 allClearBtn.addEventListener('click', allClear);
 
 backspaceBtn.addEventListener('click', backspace);
+
+equalBtn.addEventListener('click', showResult);
+
+calcContainer.addEventListener('click', (e) => {
+    if (e.target.nodeName === 'BUTTON') {
+        updateDisplay(e);
+    }
+});
