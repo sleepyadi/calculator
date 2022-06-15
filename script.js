@@ -22,6 +22,12 @@ let operate = {
         return a * b;
     },
     '/': function(a,b) {
+        if (b === 0) {
+            currentNum = '';
+            equationArr = [];
+            alert('Cannot Divide by zero.');
+            return 0;
+        }
         return a / b;
     },
     '%': function(a,b) {
