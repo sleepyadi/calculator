@@ -62,3 +62,19 @@ body {
     font-weight: 900;
     font-size: 18px;
 }
+
+.buttonrow button.operator {
+    background-color: rgba(0,200,255,.1);
+}
+
+.buttonrow button.allclear, .buttonrow button.backspace {
+    background-color: rgba(255,0,0,0.15);
+}
+
+.buttonrow button.equal {
+    background-color: rgba(0,255,0,0.3);
+}
+
+.buttonrow button.decimal {
+    background-color: rgba(0,200,255,.1);
+}
