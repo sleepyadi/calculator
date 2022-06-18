@@ -40,10 +40,12 @@ body {
 
 .display .current-number {
     box-sizing: border-box;
-    height: 100px;
+    height: max-content;
+    max-width: 340px;
     padding: 25px 12px;
     font-size: 40px;
     text-align: right;
+    overflow-wrap: break-word;
 
 }
 
