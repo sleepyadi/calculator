@@ -38,8 +38,8 @@ let operate = {
     }
 };
 
-function handleNumbers(e) {
-    currentNum += e.target.textContent;
+function handleNumbers(num) {
+    currentNum += num;
 }
 
 function countArr(arr) {
@@ -59,17 +59,17 @@ function simplifyExpression(arr, operator) {
 
 }
 
-function handleOperators(e) {
+function handleOperators(operator) {
     
     if (currentNum === '') {
-        currentNum = (e.target.textContent === '-' || e.target.textContent === "+") ? e.target.textContent : '';
+        currentNum = (operator === '-' || operator === "+") ? operator : '';
     } else if (!isNaN(currentNum)) {
         equationArr.push(Number(currentNum));
-        equationArr.push(e.target.textContent);
+        equationArr.push(operator);
         currentNum = '';
     } else {
 
-        if (e.target.textContent === '-') {
+        if (operator === '-') {
         
             if (currentNum === '-') {
                 currentNum = '+';
@@ -79,7 +79,7 @@ function handleOperators(e) {
         }
     }
     
-    simplifyExpression(equationArr, e.target.textContent);
+    simplifyExpression(equationArr, operator);
 }
 
 function updateDisplay() {
@@ -123,22 +123,30 @@ function showResult() {
 
 numbers.forEach((number) => {
 
-    number.addEventListener('click', handleNumbers)
+    number.addEventListener('click', (event) => {
+
+        let num = event.target.textContent;
+        handleNumbers(num);
+    });
 });
 
 operatorBtns.forEach((operatorBtn) => {
 
-    operatorBtn.addEventListener('click', handleOperators)
+    operatorBtn.addEventListener('click', (event) => {
+        let operator = event.target.textContent;
+        handleOperators(operator);
+    });
 });
 
 
 decimalBtn.addEventListener('click', (event) => {
-
+    // need to abstract this into a function probably
+    let symbol = event.target.textContent;
     let tempStr = currentNum.substring(currentNum.length-1);
     
     if(tempStr === '+' || tempStr === '-'|| !isNaN(tempStr)) {
         if (countDecimal(currentNum) < 1) {
-            handleNumbers(event);
+            handleNumbers(symbol);
         }
     }
 });
