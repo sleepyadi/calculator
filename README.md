@@ -13,4 +13,4 @@ Live Link : [Calculator](https://sleepyadi.github.io/calculator/)
 
 ## TODO:
 * Fix overflow text
-* Add keyboard input support
+* ~~Add keyboard input support~~
