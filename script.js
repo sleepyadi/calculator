@@ -116,10 +116,36 @@ function showResult() {
 
     if (equationArr.length == 2 && !isNaN(currentNum)) {
         let answer = operate[equationArr[1]](equationArr[0], Number(currentNum));
-        currentNum = answer;
+        currentNum = String(answer);
         equationArr = [];
     }
 }
+
+function handleKeyInputs(event) {
+
+    const pressedKey = event.key;
+
+    const NUM_KEYS = '0123456789.'.split('');
+    const OPERATOR_KEYS = "+-*/^%".split('');
+    const EXTRA_KEYS = ['Backspace', 'Enter', '=', 'Escape'];
+
+    if (NUM_KEYS.includes(pressedKey)) {
+        handleNumbers(pressedKey);
+    } else if (OPERATOR_KEYS.includes(pressedKey)) {
+        handleOperators(pressedKey);
+    } else if (EXTRA_KEYS.includes(pressedKey)) {
+
+        if (pressedKey === 'Backspace') {
+            backspace();
+        } else if (pressedKey === 'Escape') {
+            allClear();
+        } else {
+            showResult();
+        }
+    }
+    updateDisplay();
+}
+
 
 numbers.forEach((number) => {
 
@@ -162,3 +188,6 @@ calcContainer.addEventListener('click', (e) => {
         updateDisplay(e);
     }
 });
+
+//handling keyboard inputs
+window.addEventListener('keydown', handleKeyInputs)
